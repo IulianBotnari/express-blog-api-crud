@@ -33,7 +33,7 @@ const getPostsByTag = (req, res) => {
 };
 
 
-const addPost = (res, req)=>{
+const addPost = (req, res )=>{
     const newPost = {
         title: req.body.title,
         slug: req.body.slug,
@@ -44,7 +44,7 @@ const addPost = (res, req)=>{
 
     posts.push(newPost)
 
-    fs.writeFileSync(`./db/db.js`, `module.exports = ${JSON.stringify(posts, null, 4)}`)
+    fs.writeFileSync(`../db.js`, `module.exports = ${JSON.stringify(posts, null, 4)}`)
 
     return res.status(201).json(posts)
 }
