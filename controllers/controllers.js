@@ -14,13 +14,13 @@ const addCarModel = (req, res)=>{
         model: req.body.model,
         year: req.body.year
     }
-    fs.writeFileSync(`./data/carmodel.js`, `module.exports = ${JSON.stringify(newCar, null, 4)}`)
-
+    
     carModel.push(newCar)
+    
+    fs.writeFileSync(`./data/carmodel.js`, `module.exports = ${JSON.stringify(carModel, null, 4)}`)
 
 
-
-    return res.status(201).json(newCar)
+    return res.status(201).json(carModel)
 }
 
 module.exports = {
