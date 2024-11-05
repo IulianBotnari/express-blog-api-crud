@@ -44,7 +44,7 @@ const addPost = (req, res )=>{
 
     posts.push(newPost)
 
-    fs.writeFileSync(`../db.js`, `module.exports = ${JSON.stringify(posts, null, 4)}`)
+    fs.writeFileSync(`./db.js`, `module.exports = ${JSON.stringify(posts, null, 4)}`)
 
     return res.status(201).json(posts)
 }

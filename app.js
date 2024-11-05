@@ -3,7 +3,12 @@ const express = require('express')
 const app = express()
 const port = 3000
 const host = "http://127.0.0.1:"
+const cors = require(`cors`)
 
+app.use(cors({
+    origin: 'http://127.0.0.1:3001'
+    
+}))
 
 const postsRouter = require('./routers/posts.js')
 
