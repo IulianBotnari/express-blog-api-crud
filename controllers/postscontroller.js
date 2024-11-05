@@ -1,5 +1,7 @@
 const posts = require('../db')
 
+const fs = require(`fs`)
+
 function getPosts(req, res) {
     res.json(posts);
 }
@@ -31,10 +33,27 @@ const getPostsByTag = (req, res) => {
 };
 
 
+const addPost = (res, req)=>{
+    const newPost = {
+        title: req.body.title,
+        slug: req.body.slug,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags
+    }
+
+    posts.push(newPost)
+
+    fs.writeFileSync(`./db/db.js`, `module.exports = ${JSON.stringify(posts, null, 4)}`)
+
+    return res.status(201).json(posts)
+}
+
 
 
 module.exports = {
     getPosts,
     getSlug,
-    getPostsByTag
+    getPostsByTag,
+    addPost
 };
