@@ -6,6 +6,8 @@ router.get('/posts', postsController.getPosts)
 router.get('/posts/:slug', postsController.getSlug)
 router.get('/:tags', postsController.getPostsByTag)
 router.post(`/posts`, postsController.addPost)
+router.put(`/posts/:title`, postsController.updatePost)
+router.delete(`/posts/:title`, postsController.deletePost)
 
 
 

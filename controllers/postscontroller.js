@@ -1,3 +1,4 @@
+const { error } = require('console');
 const posts = require('../db')
 
 const fs = require(`fs`)
@@ -49,11 +50,49 @@ const addPost = (req, res )=>{
     return res.status(201).json(posts)
 }
 
+const updatePost = (req, res) => {
+    const findPost = posts.find(element => element.title.toLowerCase() === req.params.title)
+    
+    if (!findPost) {
+        return res.status(404).json({error:"Post not found"})
+    }
+
+    findPost.title = req.body.title
+    findPost.slug = req.body.slug
+    findPost.content = req.body.content
+    findPost.image = req.body.image
+    findPost.tags = req.body.tags
+
+    fs.writeFileSync(`./db.js`, `module.exports = ${JSON.stringify(posts, null, 4)}`)
+
+    return res.status(200).json(posts)
+}
+
+
+const deletePost = (req, res) => {
+    const cancPost = posts.find(element => element.title.toLowerCase() === req.params.title)
+
+    if (!cancPost) {
+        return res.status(404).json({error: "Post not found"})
+    }
+
+    posts.splice(posts.indexOf(cancPost), 1)
+
+    fs.writeFileSync(`./db.js`, `module.exports = ${JSON.stringify(posts, null, 4)}`)
+
+    return res.status(200).json(posts)
+}
+
+
+
+
 
 
 module.exports = {
     getPosts,
     getSlug,
     getPostsByTag,
-    addPost
+    addPost,
+    updatePost,
+    deletePost
 };

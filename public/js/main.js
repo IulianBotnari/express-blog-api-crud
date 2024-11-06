@@ -15,7 +15,7 @@ axios.get("http://127.0.0.1:3000/posts")
                 <p>${slug}</p>
                 <p>${content}</p>
                 <img src="${image}" alt="Immagine" width="500">
-                <p>${tags.join(", ")}</p>
+                <p>${tags.join(" ")}</p>
             `
             bodyEL.insertAdjacentHTML("beforeend", markup)
         });
